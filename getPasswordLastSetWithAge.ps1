@@ -1,0 +1,1 @@
+Get-Aduser -Filter 'enabled -eq $True -and PasswordNeverExpires -eq $False' -properties PasswordLastSet | Where-Object {$_.PasswordLastSet -gt (Get-Date).adddays(-20)} | Select-Object Name,SamAccountName,PasswordLastSet | Sort-Object -Property PasswordLastSet | Export-Csv -path "C:\users\dsorrells\documents\changedPasswords.csv" -notypeinformation -encoding UTF8
